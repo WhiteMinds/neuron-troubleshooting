@@ -33,7 +33,9 @@ const handle: NextApiHandler = async (req, res) => {
     }
     if (post === null) return
 
-    await syncPostsIndex([post])
+    // TODO: 经常超时，暂时不等待了
+    // await syncPostsIndex([post])
+    void syncPostsIndex([post])
 
     const postPath = `/posts/${post.source}/${post.number}`
     await Promise.all([res.revalidate('/'), res.revalidate(postPath)])
