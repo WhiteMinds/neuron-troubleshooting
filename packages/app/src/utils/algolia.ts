@@ -44,7 +44,9 @@ export async function syncPostsIndex(posts: Post[]) {
     })
     .flat()
   console.log('records', records)
+  console.time('saveObjects')
   const result = await index.saveObjects(records).wait()
+  console.timeEnd('saveObjects')
   console.log('records result', result)
   return result
 }
