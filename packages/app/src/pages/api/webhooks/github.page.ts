@@ -33,12 +33,14 @@ const handle: NextApiHandler = async (req, res) => {
     }
     if (post === null) return
 
-    // TODO: 经常超时，暂时不等待了
-    // await syncPostsIndex([post])
-    void syncPostsIndex([post])
-
     const postPath = `/posts/${post.source}/${post.number}`
-    await Promise.all([res.revalidate('/'), res.revalidate(postPath)])
+    await Promise.all([
+      // often timeout
+      syncPostsIndex([post]),
+
+      res.revalidate('/'),
+      res.revalidate(postPath),
+    ])
   }
 
   // TODO: Vercel seems to have a timeout mechanism that forcibly terminates the process.
