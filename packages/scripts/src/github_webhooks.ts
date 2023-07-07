@@ -1,4 +1,5 @@
 import './prepare'
+import { basename } from 'path'
 import { createWebhook, getWebhooks, updateWebhook } from './utils/github'
 
 async function main() {
@@ -28,7 +29,7 @@ async function main() {
     await updateWebhook(existedWebhook.id, callbackURL)
   }
 
-  console.log(`script ${__filename} done`)
+  console.log(`script ${basename(import.meta.url)} done`)
 }
 
 function getAPIPath() {
