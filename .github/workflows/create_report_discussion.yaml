@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+      - feat/338_WeeklyReportScript
     paths:
       - packages/scripts/snapshots
 
