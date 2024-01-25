@@ -1,6 +1,8 @@
 name: Update Report Snapshot
 
 on:
+  push:
+    branches: [feat/338_WeeklyReportScript]
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 1'
@@ -19,12 +21,17 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: report:update
+        id: report_update
         env:
           # The script requires public_repo, read:org, read:project permissions, and needs a personal access token (classic) to obtain these permissions.
           GITHUB_TOKEN: ${{ secrets.REPORT_GITHUB_TOKEN }}
         run: |
           yarn install
-          yarn workspace @magickbase-website/scripts report:update
+          {
+            echo 'DEVLOG<<EOF'
+            yarn workspace @magickbase-website/scripts report:update | sed '0,/^generateDevlogFromSnapshotsDiff():$/d'
+            echo EOF
+          } >> $GITHUB_OUTPUT
           git add packages/scripts/snapshots
 
       - name: Set GPG
@@ -40,6 +47,10 @@ jobs:
         with:
           title: Update Report Snapshot
           commit-message: 'feat: update report snapshot'
-          body: 'After this PR is merged, a corresponding discussion will be automatically created'
+          body: '
+          After this PR is merged, a corresponding devlog discussion will be automatically created, with the content preview as follows\n\n
+          ---\n\n
+          ${{ steps.report_update.outputs.DEVLOG }}
+          '
           committer: ${{ vars.COMMITTER }}
           branch: update-report-snapshot

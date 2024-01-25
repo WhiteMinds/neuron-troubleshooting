@@ -134,7 +134,7 @@ export interface ProjectItem {
 }
 
 export async function getProjectItems(id: string) {
-  const res = await octokit.graphql.paginate<{
+  const res = await octokit.graphql<{
     node: {
       items: {
         nodes: ProjectItem[]
@@ -145,7 +145,7 @@ export async function getProjectItems(id: string) {
       query($cursor: String, $id: ID!) {
         node(id: $id) {
           ... on ProjectV2 {
-            items(first: 20, after: $cursor) {
+            items(first: 5, after: $cursor) {
               nodes {
                 id
                 content {
