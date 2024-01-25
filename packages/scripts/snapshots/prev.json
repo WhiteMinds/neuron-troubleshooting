@@ -1,0 +1,36 @@
+{
+  "CKB Explorer": [
+    {
+      "id": "PVTI_lADOBjLfC84AMiKwzgFHFUU",
+      "content": {
+        "title": "Make workflow of m-nft synchronization clear and maybe provide a standalone service",
+        "number": 49,
+        "url": "https://github.com/Magickbase/ckb-explorer-public-issues/issues/49"
+      },
+      "fieldValues": {
+        "nodes": [
+          { "field": { "name": "Assignees" } },
+          {
+            "repository": {
+              "name": "ckb-explorer-public-issues",
+              "url": "https://github.com/Magickbase/ckb-explorer-public-issues"
+            },
+            "field": { "name": "Repository" }
+          },
+          {
+            "labels": {
+              "nodes": [{ "id": "LA_kwDOHFQx5M7tEEBJ", "name": "enhancement", "description": "New feature or request" }]
+            },
+            "field": { "name": "Labels" }
+          },
+          {
+            "text": "Make workflow of m-nft synchronization clear and maybe provide a standalone service",
+            "field": { "name": "Title" }
+          },
+          { "name": "🆕 New", "field": { "name": "Status" } },
+          { "name": "🏝 Low", "field": { "name": "Priority" } }
+        ]
+      }
+    }
+  ]
+}
